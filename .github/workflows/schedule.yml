@@ -1,0 +1,12 @@
+name: Telegram Auto Post
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run bot
+        run: python send.py
