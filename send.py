@@ -1,22 +1,22 @@
-import requests
 import os
-from datetime import datetime
+import requests
 
-TOKEN = os.getenv("BOT_TOKEN")
-CHAT_ID = os.getenv("CHAT_ID")
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
 
-with open("messages.txt", "r", encoding="utf-8") as f:
-    messages = [m.strip() for m in f.read().split("===") if m.strip()]
+text = "TEST_FROM_GITHUB_ACTION"
 
-# 以日期作为索引：第 1 天发第 1 条
-day_index = datetime.utcnow().toordinal() % len(messages)
-text = messages[day_index]
-
-url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
 payload = {
     "chat_id": CHAT_ID,
     "text": text
 }
 
-requests.post(url, data=payload)
+resp = requests.post(url, data=payload)
+
+print("Status code:", resp.status_code)
+print("Response text:", resp.text)
+
+# 强制失败，方便你在 Actions 里看到
+resp.raise_for_status()
