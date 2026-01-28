@@ -13,6 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: List files
+        run: |
+          echo "===== ROOT FILES ====="
+          ls -la
+          echo "===== send.py content ====="
+          cat send.py
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -25,4 +32,7 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python send.py
+        run: |
+          echo "===== RUN START ====="
+          python send.py
+          echo "===== RUN END ====="
