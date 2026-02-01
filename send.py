@@ -15,7 +15,7 @@ weekday_index = now.weekday()
 
 # ===== 关键修复：绝对路径 =====
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MESSAGE_PATH = os.path.join(BASE_DIR, "message.txt")
+MESSAGE_PATH = os.path.join(BASE_DIR, "messages.txt")
 
 with open(MESSAGE_PATH, "r", encoding="utf-8") as f:
     content = f.read()
